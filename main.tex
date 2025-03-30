@@ -1,0 +1,237 @@
+\documentclass[12pt]{article}\usepackage[]{graphicx}\usepackage[]{xcolor}
+\makeatletter
+\def\maxwidth{ %
+	\ifdim\Gin@nat@width>\linewidth
+	\linewidth
+	\else
+	\Gin@nat@width
+	\fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlsng}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hldef}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+	\def\at@end@of@kframe{}%
+	\ifinner\ifhmode%
+	\def\at@end@of@kframe{\end{minipage}}%
+\begin{minipage}{\columnwidth}%
+	\fi\fi%
+	\def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+		\colorbox{shadecolor}{##1}\hskip-\fboxsep
+		% There is no \\@totalrightmargin, so:
+		\hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+	\MakeFramed {\advance\hsize-\width
+		\@totalleftmargin\z@ \linewidth\hsize
+		\@setminipage}}%
+{\par\unskip\endMakeFramed%
+	\at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+%以下是关于字体、版面的设置
+% 允许斜体和粗体
+\usepackage[SlantFont,BoldFont]{xeCJK} 
+% 设置缺省中文字体为 宋体，请大家使用宋体来排版，不要修改字体
+\setCJKmainfont{SimSun} 
+% 设置等宽字体         
+\setCJKmonofont{SimSun}
+% 设置缺省英文字体          
+\setmainfont{Times New Roman}
+% 英文等宽字体      
+\setmonofont{Times New Roman}
+% 英文无衬线字体          
+\setsansfont{Times New Roman}         
+%版面尺寸设置
+\usepackage[a4paper,top=3.5cm,bottom=2.6cm,left=3cm,right=2.6cm]{geometry}
+%中文缩进两个汉字位，请勿修改
+\setlength{\parindent}{2.4em}                                     
+%章节标题格式设置
+\usepackage{titlesec}
+%目录格式设置              
+\usepackage{titletoc}
+%首行缩进       
+\usepackage{indentfirst}
+%获得总页数           
+\usepackage{lastpage}
+%公式环境数学命令              
+\usepackage{amsmath}               
+\usepackage{amssymb}
+\usepackage{pifont} 
+%数组和表格制作
+\usepackage{array}                
+\usepackage{booktabs}
+\usepackage{supertabular}
+\usepackage{multirow}
+\usepackage{abstract}
+\usepackage{enumerate}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{graphicx}              
+\usepackage{ccaption}
+\usepackage{fancybox}
+\usepackage{fancyhdr}
+\usepackage{colortbl}
+% for fig.pos='H' 
+\usepackage{float} 
+% for subfigure                
+\usepackage{subfig}
+%\usepackage{subcaption} 
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{float} 
+%\usepackage{subfigure}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{float} 
+%\usepackage{subfigure}
+\usepackage{subcaption}
+
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{subfloat}
+\usepackage{subcaption}
+
+%以下是关于字号的设置
+\makeatletter
+\newcommand{\chuhao}{\fontsize{42pt}{\baselineskip}\selectfont}    %初号
+\newcommand{\xiaochuhao}{\fontsize{36pt}{\baselineskip}\selectfont}%小初号
+\newcommand{\yihao}{\fontsize{26pt}{\baselineskip}\selectfont}     %一号
+\newcommand{\xiaoyihao}{\fontsize{24pt}{\baselineskip}\selectfont} %小一号
+\newcommand{\erhao}{\fontsize{22pt}{\baselineskip}\selectfont}     %二号
+\newcommand{\xiaoerhao}{\fontsize{18pt}{\baselineskip}\selectfont} %小二号
+\newcommand{\sanhao}{\fontsize{16pt}{\baselineskip}\selectfont}    %三号
+\newcommand{\xiaosanhao}{\fontsize{15pt}{\baselineskip}\selectfont}%小三号
+\newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont}     %四号
+\newcommand{\xiaosihao}{\fontsize{12pt}{\baselineskip}\selectfont} %小四号
+\newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}   %五号
+\newcommand{\xiaowuhao}{\fontsize{9pt}{\baselineskip}\selectfont}  %小五号
+\newcommand{\liuhao}{\fontsize{7.5pt}{\baselineskip}\selectfont}   %六号
+\newcommand{\qihao}{\fontsize{5.5pt}{\baselineskip}\selectfont}    %七号
+
+\setCJKfamilyfont{hei}{SimHei}
+\newcommand{\hei}{\CJKfamily{hei}}
+
+
+\titleformat{\subsection}{\hei\sihao}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\hei\xiaosihao}{\thesubsubsection}{1em}{}
+
+% 行间距
+\renewcommand\baselinestretch{1.5}     
+
+\renewcommand\tablename{表}
+\renewcommand\figurename{图}
+\renewcommand\refname{\sanhao\hei{参考文献}}
+
+%图片命名的修改
+\newcommand{\figcaption}{\def\@captype{figure}\caption}
+%表格命名的修改 
+\newcommand{\tabcaption}{\def\@captype{table}\caption}
+
+%让文中的参考文献标注显示在右上角，并修改为命令为\upcite{}
+\newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
+
+% 设置页眉样式
+\fancypagestyle{plain}{
+	\fancyhead{}
+	\fancyhead[L]{\wuhao{软件名称~~~版本号}}
+	\fancyhead[R]{ \thepage}
+}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[L]{\wuhao{软件名称~~~版本号}
+\fancyhead[R]{Page \thepage\ of \pageref{LastPage}}
+
+\makeatother
+
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+
+\begin{document}
+	% 设置第一个标题
+	\title{\xiaoerhao\textbf{{\Huge 软件名称 }\\
+	使用说明
+}} 
+	% 设置作者和日期
+	\author{作者1		\\
+		作者2		\\
+		作者3		\\
+
+	}
+	\date{}
+	\maketitle
+
+\newpage
+% 文件修订记录章节
+\section*{文件修订记录}
+\addcontentsline{toc}{chapter}{文件修订记录}  % 手动添加到目录
+
+\renewcommand{\arraystretch}{1.5} % 调整行高为原来的 1.5 倍
+
+\begin{center}
+	\begin{tabular}{ | m{1.5cm}<{\centering}|m{4cm}<{\centering} | m{5cm}<{\centering} | m{3.5cm}<{\centering} |}
+		\hline
+		版本号 & 生成日期 & 作者 & 修订内容 \\ % 表头
+		\hline
+		V1.0 & 2025年3月30日 & 作者1，作者2，作者3  & 初始版本 \\ % 第一行
+		\hline
+		&  &  &  \\ % 第二行
+		\hline
+		&  &  &  \\ % 空行
+		\hline
+		&  &  &  \\ % 空行
+		\hline
+		&  &  &  \\ % 空行
+		\hline
+		&  &  &  \\ % 空行
+		\hline
+		&  &  &  \\ % 空行
+		\hline
+		&  &  &  \\ % 空行
+		\hline
+		&  &  &  \\ % 空行
+		\hline
+		&  &  &  \\ % 空行
+		\hline
+		&  &  &  \\ % 空行
+		\hline
+		&  &  &  \\ % 空行
+		\hline
+	\end{tabular}
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%以下是正文
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\input{texfile/1_introduction.tex}
+\newpage
+\input{texfile/2_implosion.tex}
+\newpage+
+\input{texfile/3_summary.tex}
+
+
+
+\end{document}
