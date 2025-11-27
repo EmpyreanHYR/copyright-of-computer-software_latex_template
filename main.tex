@@ -1,4 +1,6 @@
-\documentclass[12pt]{article}\usepackage[]{graphicx}\usepackage[]{xcolor}
+\documentclass[12pt]{article}
+\usepackage[]{graphicx}
+\usepackage[]{xcolor}
 \makeatletter
 \def\maxwidth{ %
 	\ifdim\Gin@nat@width>\linewidth
@@ -151,15 +153,35 @@
 %让文中的参考文献标注显示在右上角，并修改为命令为\upcite{}
 \newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
 
+% 定义统一的作者和版本号
+\newcommand{\SoftwareName}{软件名称}
+\newcommand{\Version}{V1.0}
+
+% 定义纯作者列表（不含“作者：”，用换行分隔）
+\newcommand{\PureAuthors}{%
+	作者1 \\ 
+	作者2 \\ 
+	作者3%
+}
+
+% 带前缀的完整作者显示（“作者：”不参与替换）
+\newcommand{\BasicAuthor}{作者：\\\PureAuthors}
+
+% 修订记录的作者（仅处理纯作者列表，换行转逗号）
+\usepackage{xstring}
+\newcommand{\RevisedAuthor}{%
+	\StrSubstitute{\PureAuthors}{\\}{, }% 只替换作者间的换行
+}
+
 % 设置页眉样式
 \fancypagestyle{plain}{
 	\fancyhead{}
-	\fancyhead[L]{\wuhao{软件名称~~~版本号}}
-	\fancyhead[R]{ \thepage}
+	\fancyhead[L]{\wuhao{\SoftwareName~~~\Version}}
+	\fancyhead[R]{Page \thepage\ of \pageref{LastPage}}
 }
 \pagestyle{fancy}
 \fancyhead{}
-\fancyhead[L]{\wuhao{软件名称~~~版本号}
+\fancyhead[L]{\wuhao{\SoftwareName~~~\Version}}
 \fancyhead[R]{Page \thepage\ of \pageref{LastPage}}
 
 \makeatother
@@ -168,70 +190,64 @@
 
 \begin{document}
 	% 设置第一个标题
-	\title{\xiaoerhao\textbf{{\Huge 软件名称 }\\
-	使用说明
-}} 
+	\title{\xiaoerhao\textbf{{\Huge \SoftwareName }\\
+			使用说明
+	}} 
 	% 设置作者和日期
-	\author{作者1		\\
-		作者2		\\
-		作者3		\\
-
-	}
+	\author{ \BasicAuthor }
 	\date{}
 	\maketitle
-
-\newpage
-% 文件修订记录章节
-\section*{文件修订记录}
-\addcontentsline{toc}{chapter}{文件修订记录}  % 手动添加到目录
-
-\renewcommand{\arraystretch}{1.5} % 调整行高为原来的 1.5 倍
-
-\begin{center}
-	\begin{tabular}{ | m{1.5cm}<{\centering}|m{4cm}<{\centering} | m{5cm}<{\centering} | m{3.5cm}<{\centering} |}
-		\hline
-		版本号 & 生成日期 & 作者 & 修订内容 \\ % 表头
-		\hline
-		V1.0 & 2025年3月30日 & 作者1，作者2，作者3  & 初始版本 \\ % 第一行
-		\hline
-		&  &  &  \\ % 第二行
-		\hline
-		&  &  &  \\ % 空行
-		\hline
-		&  &  &  \\ % 空行
-		\hline
-		&  &  &  \\ % 空行
-		\hline
-		&  &  &  \\ % 空行
-		\hline
-		&  &  &  \\ % 空行
-		\hline
-		&  &  &  \\ % 空行
-		\hline
-		&  &  &  \\ % 空行
-		\hline
-		&  &  &  \\ % 空行
-		\hline
-		&  &  &  \\ % 空行
-		\hline
-		&  &  &  \\ % 空行
-		\hline
-	\end{tabular}
-\end{center}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%以下是正文
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\input{texfile/1_introduction.tex}
-\newpage
-\input{texfile/2_implosion.tex}
-\newpage+
-\input{texfile/3_summary.tex}
-
-
-
+	
+	\newpage
+	% 文件修订记录章节
+	\section*{文件修订记录}
+	\addcontentsline{toc}{chapter}{文件修订记录}  % 手动添加到目录
+	
+	\renewcommand{\arraystretch}{1.5} % 调整行高为原来的 1.5 倍
+	
+	\begin{center}
+		\begin{tabular}{ | m{1.5cm}<{\centering}|m{4cm}<{\centering} | m{5cm}<{\centering} | m{3.5cm}<{\centering} |}
+			\hline
+			版本号 & 生成日期 & 作者 & 修订内容 \\ % 表头
+			\hline
+			V1.0 & 2025年6月29日 & \RevisedAuthor  & 初始版本 \\ % 第一行
+			\hline
+			&  &  &  \\ % 第二行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%
+	%以下是正文
+	%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\newpage
+	\input{texfile/1_introduction.tex}
+	\newpage
+	\input{texfile/2_implosion.tex}
+	\newpage
+	\input{texfile/3_summary.tex}
+	
 \end{document}
