@@ -237,7 +237,25 @@
 		\end{tabular}
 	\end{center}
 	
+	% 目录
+	\newpage
+	\section*{目录}
+	\addcontentsline{toc}{section}{目录}  % 手动添加到目录
+	\renewcommand{\tableofcontents}{~}
+	\tableofcontents
+
+		% 图表清单
+	\newpage
+	\section*{图目录}
+	\addcontentsline{toc}{section}{图目录}
+	\renewcommand{\listfigurename}{~}
+	\listoffigures
 	
+	\newpage
+	\section*{表目录}
+	\addcontentsline{toc}{section}{表目录}
+	\renewcommand{\listtablename}{~}
+	\listoftables
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%
 	%以下是正文
