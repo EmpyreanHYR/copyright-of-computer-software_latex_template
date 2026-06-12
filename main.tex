@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[12pt,fontset=windows]{ctexart}
 \usepackage[]{graphicx}
 \usepackage[]{xcolor}
 \makeatletter
@@ -11,17 +11,6 @@
 }
 \makeatother
 
-\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
-\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
-\newcommand{\hlsng}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
-\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
-\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
-\newcommand{\hldef}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
-\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
-\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
-\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
-\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
-\let\hlipl\hlkwb
 
 \usepackage{framed}
 \makeatletter
@@ -50,18 +39,15 @@
 
 \usepackage{alltt}
 %以下是关于字体、版面的设置
-% 允许斜体和粗体
-\usepackage[SlantFont,BoldFont]{xeCJK} 
-% 设置缺省中文字体为 宋体，请大家使用宋体来排版，不要修改字体
-\setCJKmainfont{SimSun} 
-% 设置等宽字体         
+% ctexart 文档类已自动配置中文字体（fontset=windows），无需 xeCJK 手动加载
+% 内置命令：\songti（宋体）\heiti（黑体）\kaishu（楷书）\fangsong（仿宋）
+% 以下仅设等宽中文字体，文档若无代码块可删除此行
 \setCJKmonofont{SimSun}
 % 设置缺省英文字体          
 \setmainfont{Times New Roman}
-% 英文等宽字体      
-\setmonofont{Times New Roman}
-% 英文无衬线字体          
-\setsansfont{Times New Roman}         
+% 英文等宽字体 —— 原为 Times（非等宽），已修正；如无 Consolas 可改为 Courier New
+\setmonofont{Consolas}
+% 文档不使用无衬线字体，删除原 \setsansfont{Times New Roman}（衬线体设为无衬线属语义错误）         
 %版面尺寸设置
 \usepackage[a4paper,top=3.5cm,bottom=2.6cm,left=3cm,right=2.6cm]{geometry}
 %中文缩进两个汉字位，请勿修改
@@ -70,8 +56,7 @@
 \usepackage{titlesec}
 %目录格式设置              
 \usepackage{titletoc}
-%首行缩进       
-\usepackage{indentfirst}
+% 首行缩进已由 ctexart 内置处理，无需 indentfirst
 %获得总页数           
 \usepackage{lastpage}
 %公式环境数学命令              
@@ -87,31 +72,14 @@
 \usepackage{enumerate}
 \usepackage{verbatim}
 \usepackage{listings}
-\usepackage{graphicx}              
-\usepackage{ccaption}
+\usepackage{pgffor} % 用于修订记录表格的 \foreach 循环
 \usepackage{fancybox}
 \usepackage{fancyhdr}
 \usepackage{colortbl}
 % for fig.pos='H' 
-\usepackage{float} 
-% for subfigure                
-\usepackage{subfig}
-%\usepackage{subcaption} 
+\usepackage{float}
+% for subfigure —— 使用 subcaption 替代 subfig/subfloat，后者与 subcaption 冲突
 \usepackage{caption}
-\usepackage{graphicx}
-\usepackage{float} 
-%\usepackage{subfigure}
-\usepackage{subcaption}
-\usepackage{caption}
-\usepackage{graphicx}
-\usepackage{float} 
-%\usepackage{subfigure}
-\usepackage{subcaption}
-
-\usepackage{caption}
-\usepackage{graphicx}
-\usepackage{float} 
-\usepackage{subfloat}
 \usepackage{subcaption}
 
 %以下是关于字号的设置
@@ -131,10 +99,11 @@
 \newcommand{\liuhao}{\fontsize{7.5pt}{\baselineskip}\selectfont}   %六号
 \newcommand{\qihao}{\fontsize{5.5pt}{\baselineskip}\selectfont}    %七号
 
-\setCJKfamilyfont{hei}{SimHei}
-\newcommand{\hei}{\CJKfamily{hei}}
+% \hei 作为 \heiti（ctexart 内置黑体命令）的别名，兼容全文已有用法
+\newcommand{\hei}{\heiti}
 
 
+\titleformat{\section}{\newpage\hei\sanhao}{\thesection}{1em}{}
 \titleformat{\subsection}{\hei\sihao}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\hei\xiaosihao}{\thesubsubsection}{1em}{}
 
@@ -151,7 +120,7 @@
 \newcommand{\tabcaption}{\def\@captype{table}\caption}
 
 %让文中的参考文献标注显示在右上角，并修改为命令为\upcite{}
-\newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
+\newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}}
 
 % 定义统一的作者和版本号
 \newcommand{\SoftwareName}{软件名称}
@@ -187,12 +156,15 @@
 \makeatother
 
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% 超链接支持 —— PDF 目录、交叉引用、URL 可点击跳转
+\usepackage[colorlinks=true,
+            linkcolor=black,
+            citecolor=black,
+            urlcolor=blue]{hyperref}
 
 \begin{document}
 	% 设置第一个标题
-	\title{\xiaoerhao\textbf{{\Huge \SoftwareName }\\
-			使用说明
-	}} 
+	\title{\erhao\textbf{\SoftwareName}\\[0.5em] \sanhao 使用说明} 
 	% 设置作者和日期
 	\author{ \BasicAuthor }
 	\date{}
@@ -201,39 +173,22 @@
 	\newpage
 	% 文件修订记录章节
 	\section*{文件修订记录}
-	\addcontentsline{toc}{chapter}{文件修订记录}  % 手动添加到目录
+	\addcontentsline{toc}{section}{文件修订记录}  % 手动添加到目录
 	
 	\renewcommand{\arraystretch}{1.5} % 调整行高为原来的 1.5 倍
 	
 	\begin{center}
-		\begin{tabular}{ | m{1.5cm}<{\centering}|m{4cm}<{\centering} | m{5cm}<{\centering} | m{3.5cm}<{\centering} |}
-			\hline
+		\begin{tabular}{ m{1.5cm}<{\centering} m{4cm}<{\centering} m{5cm}<{\centering} m{3.5cm}<{\centering} }
+			\toprule
 			版本号 & 生成日期 & 作者 & 修订内容 \\ % 表头
-			\hline
-			V1.0 & 2025年6月29日 & \RevisedAuthor  & 初始版本 \\ % 第一行
-			\hline
-			&  &  &  \\ % 第二行
-			\hline
-			&  &  &  \\ % 空行
-			\hline
-			&  &  &  \\ % 空行
-			\hline
-			&  &  &  \\ % 空行
-			\hline
-			&  &  &  \\ % 空行
-			\hline
-			&  &  &  \\ % 空行
-			\hline
-			&  &  &  \\ % 空行
-			\hline
-			&  &  &  \\ % 空行
-			\hline
-			&  &  &  \\ % 空行
-			\hline
-			&  &  &  \\ % 空行
-			\hline
-			&  &  &  \\ % 空行
-			\hline
+			\midrule
+			V1.0 & 2025年6月29日 & \RevisedAuthor  & 初始版本 \\ % 第一行数据
+			\midrule
+			% === 预留修订记录空行 ===
+			% 以下用 \foreach 循环生成 11 行空白修订记录，每行包含 4 个空单元格并自动补横线
+			% 修改行数时只需改动 {1,...,11} 中的数字即可，无需逐行增删
+			\foreach \n in {1,...,11} { & & & \\ \midrule}
+			\bottomrule
 		\end{tabular}
 	\end{center}
 	
@@ -241,8 +196,9 @@
 	\newpage
 	\section*{目录}
 	\addcontentsline{toc}{section}{目录}  % 手动添加到目录
-	\renewcommand{\tableofcontents}{~}
-	\tableofcontents
+	\makeatletter
+	\@starttoc{toc}% 直接输出目录内容，避免覆盖 \tableofcontents 原始定义
+	\makeatother
 
 		% 图表清单
 	\newpage

@@ -35,8 +35,26 @@
 	 ```
 	 可多编译几次以生成目录、图表目录等
 
+## 字体要求
+
+本模板使用 `ctexart` 文档类（`fontset=windows`），依赖以下字体：
+
+| 字体 | 用途 | Windows | macOS 替代 |
+|------|------|---------|------------|
+| SimSun（宋体） | 正文 | 系统自带 | 安装 Office 字体 或改为 `fontset=mac` |
+| SimHei（黑体） | 章节标题 | 系统自带 | 同上 |
+| KaiTi（楷书） | ctex 内置命令 | 系统自带 | 同上 |
+| FangSong（仿宋） | ctex 内置命令 | 系统自带 | 同上 |
+| Consolas | 英文等宽字体 | 系统自带 | 改为 `Courier New` 或 `Source Code Pro` |
+| Times New Roman | 英文正文字体 | 系统自带 | 系统自带 |
+
+> **非 Windows 用户**：将 `\documentclass[12pt,fontset=windows]{ctexart}` 中的 `fontset=windows` 改为 `fontset=mac`（macOS）或 `fontset=ubuntu`（Linux），并根据上表调整 `\setmonofont{Consolas}`。
+
 ## 注意事项
 - 模板仅供参考，具体格式请结合实际登记要求调整
+- 正文每个 `\section` 将自动从新页开始（由 `\titleformat{\section}{\newpage...}` 控制），无需在每个 `\input` 前手动 `\newpage`
+- `\upcite{}` 命令可将参考文献标注显示为右上角上标
+- 修订记录表格行数可通过修改 `\foreach \n in {1,...,11}` 中的数字调整
 - 如遇格式或编译问题，欢迎 issue 讨论
 
 ## 版权声明
