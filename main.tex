@@ -72,7 +72,7 @@
 \usepackage{enumerate}
 \usepackage{verbatim}
 \usepackage{listings}
-\usepackage{pgffor} % 用于修订记录表格的 \foreach 循环
+% pgffor 曾用于修订记录表格的 \foreach 循环，因 tabular 内与 \noalign 冲突已移除
 \usepackage{fancybox}
 \usepackage{fancyhdr}
 \usepackage{colortbl}
@@ -103,7 +103,10 @@
 \newcommand{\hei}{\heiti}
 
 
+% 编号章节（正文 \section）自动从新页开始
 \titleformat{\section}{\newpage\hei\sanhao}{\thesection}{1em}{}
+% 无编号章节（\section*）不加 \newpage，避免目录/图表清单出现空白页
+\titleformat{name=\section,numberless}{\hei\sanhao}{}{1em}{}
 \titleformat{\subsection}{\hei\sihao}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\hei\xiaosihao}{\thesubsubsection}{1em}{}
 
@@ -153,6 +156,8 @@
 \fancyhead[L]{\wuhao{\SoftwareName~~~\Version}}
 \fancyhead[R]{Page \thepage\ of \pageref{LastPage}}
 
+\setlength{\headheight}{14.5pt} % 消除 fancyhdr \headheight too small 警告
+
 \makeatother
 
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -178,17 +183,36 @@
 	\renewcommand{\arraystretch}{1.5} % 调整行高为原来的 1.5 倍
 	
 	\begin{center}
-		\begin{tabular}{ m{1.5cm}<{\centering} m{4cm}<{\centering} m{5cm}<{\centering} m{3.5cm}<{\centering} }
-			\toprule
+		\begin{tabular}{ | m{1.5cm}<{\centering}|m{4cm}<{\centering} | m{4.64cm}<{\centering} | m{3.5cm}<{\centering} |}
+			\hline
 			版本号 & 生成日期 & 作者 & 修订内容 \\ % 表头
-			\midrule
-			V1.0 & 2025年6月29日 & \RevisedAuthor  & 初始版本 \\ % 第一行数据
-			\midrule
-			% === 预留修订记录空行 ===
-			% 以下用 \foreach 循环生成 11 行空白修订记录，每行包含 4 个空单元格并自动补横线
-			% 修改行数时只需改动 {1,...,11} 中的数字即可，无需逐行增删
-			\foreach \n in {1,...,11} { & & & \\ \midrule}
-			\bottomrule
+			\hline
+			V1.0 & 2025年6月29日 & \RevisedAuthor  & 初始版本 \\ % 第一行
+			\hline
+			&  &  &  \\ % 第二行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
+			&  &  &  \\ % 空行
+			\hline
 		\end{tabular}
 	\end{center}
 	
