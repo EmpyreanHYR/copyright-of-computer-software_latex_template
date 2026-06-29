@@ -24,7 +24,7 @@
 ├── compile.bat             # 一键编译脚本（Windows）
 ├── texfile/
 │   ├── 1_introduction.tex  # 软件概述
-│   ├── 2_implosion.tex     # 操作教程
+│   ├── 2_operation.tex       # 操作教程
 │   └── 3_summary.tex       # 总结展望
 ├── image/                  # 图片资源目录
 ├── LICENSE

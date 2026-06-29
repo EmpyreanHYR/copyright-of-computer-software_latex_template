@@ -58,6 +58,8 @@
 %目录格式设置              
 \usepackage{titletoc}
 % 首行缩进已由 ctexart 内置处理，无需 indentfirst
+% 精确控制行距（自动豁免脚注/浮动体）
+\usepackage{setspace}
 %获得总页数           
 \usepackage{lastpage}
 %公式环境数学命令              
@@ -111,8 +113,8 @@
 \titleformat{\subsection}{\hei\sihao}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\hei\xiaosihao}{\thesubsubsection}{1em}{}
 
-% 行间距
-\renewcommand\baselinestretch{1.5}     
+% 行间距（1.5 倍；setspace 对脚注/浮动体智能豁免）
+\onehalfspacing     
 
 \renewcommand\tablename{表}
 \renewcommand\figurename{图}
@@ -146,16 +148,18 @@
 	\StrSubstitute{\PureAuthors}{\\}{, }% 只替换作者间的换行
 }
 
-% 设置页眉样式
+% 设置页眉样式（公共定义避免重复）
+\newcommand{\CommonHeader}{
+	\fancyhead[L]{\wuhao{\SoftwareName~~~\Version}}%
+	\fancyhead[R]{Page \thepage\ of \pageref{LastPage}}%
+}
 \fancypagestyle{plain}{
 	\fancyhead{}
-	\fancyhead[L]{\wuhao{\SoftwareName~~~\Version}}
-	\fancyhead[R]{Page \thepage\ of \pageref{LastPage}}
+	\CommonHeader
 }
 \pagestyle{fancy}
 \fancyhead{}
-\fancyhead[L]{\wuhao{\SoftwareName~~~\Version}}
-\fancyhead[R]{Page \thepage\ of \pageref{LastPage}}
+\CommonHeader
 
 \setlength{\headheight}{14.5pt} % 消除 fancyhdr \headheight too small 警告
 
@@ -245,8 +249,14 @@
 	\newpage
 	\input{texfile/1_introduction.tex}
 	\newpage
-	\input{texfile/2_implosion.tex}
+	\input{texfile/2_operation.tex}
 	\newpage
 	\input{texfile/3_summary.tex}
 	
+	% 参考文献
+	\clearpage
+	\addcontentsline{toc}{section}{参考文献}
+	\begin{thebibliography}{99}
+		\bibitem{example} 示例参考文献。请替换为实际引用的文献条目。
+	\end{thebibliography}
 \end{document}
