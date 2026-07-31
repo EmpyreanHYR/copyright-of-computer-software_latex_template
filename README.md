@@ -17,6 +17,7 @@
 - 一键编译脚本 `compile.bat`（Windows），自动多遍编译 + 清理中间文件
 - 适合直接用于著作权登记材料
 
+
 ## 目录结构
 
 ```
@@ -30,6 +31,28 @@
 ├── LICENSE
 ├── README.md
 ```
+
+
+
+## 🚀 完整软著申请解决方案
+
+本仓库专注于提供高质量的 **文档鉴别材料**（使用说明书）LaTeX 模板。如果您还需要处理 **程序鉴别材料**（源代码），欢迎使用配套工具：
+
+[![Software Copyright Toolkit](https://img.shields.io/badge/配套工具-Software%20Copyright%20Toolkit-blue?style=for-the-badge&logo=github)](https://github.com/EmpyreanHYR/software-copyright-toolkit)
+
+### 为什么推荐它？
+| 特性 | 说明 |
+| :--- | :--- |
+| 📝 **程序鉴别材料生成** | 一键生成符合规范的“前后 30 页”及“全量代码” Word 文档 |
+| 📊 **精准代码统计** | 支持 40+ 种语言，自动排除空行与注释，生成 Markdown 报告 |
+| 🖱️ **零门槛使用** | 提供开箱即用的 GUI 图形界面，无需记忆任何命令行参数 |
+| ⚡ **高性能与健壮性** | 支持大文件流式读取，自动处理多种文件编码 |
+
+> **💡 最佳实践**：  
+> 1. 使用 [software-copyright-toolkit](https://github.com/EmpyreanHYR/software-copyright-toolkit) 导出您的源代码 Word 文档。  
+> 2. 使用本 [LaTeX 模板](https://github.com/EmpyreanHYR/copyright-of-computer-software_latex_template) 填写并编译您的软件使用说明书。  
+> 3. 合并提交，轻松完成软著登记材料准备！
+
 
 ## 使用方法
 
