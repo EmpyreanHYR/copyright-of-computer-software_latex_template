@@ -12,6 +12,7 @@
 	- 总结展望
 - `hyperref` 超链接支持：PDF 目录、交叉引用、URL 可点击跳转
 - `\upcite{}` 命令生成右上角参考文献标注
+- 长表格 `longtable` 支持：单元格内断行、跨页自动换页并重复表头
 - 正文 `\section` 自动从新页开始，无需手动 `\newpage`
 - 图表命名、参考文献等均为中文格式
 - 一键编译脚本 `compile.bat`（Windows），自动多遍编译 + 清理中间文件
@@ -23,6 +24,7 @@
 ```
 ├── main.tex                # 主文件，编译入口
 ├── compile.bat             # 一键编译脚本（Windows）
+├── clean.bat               # 清理中间文件脚本
 ├── texfile/
 │   ├── 1_introduction.tex  # 软件概述
 │   ├── 2_operation.tex       # 操作教程
@@ -88,6 +90,37 @@ compile.bat keep     # 编译 + 保留中间文件（排查错误时用）
 | Times New Roman | 英文正文字体 | 系统自带 | 系统自带 |
 
 > **非 Windows 用户**：将 `\documentclass[12pt,fontset=windows]{ctexart}` 中的 `fontset=windows` 改为 `fontset=mac`（macOS）或 `fontset=ubuntu`（Linux），并根据上表调整 `\setmonofont{Consolas}`。
+
+## 表格：单元格断行与跨页
+
+模板已内置 `longtable` 长表格支持，行数超出一页时自动断行换页，并在续页自动重复表头。已有表格（如"文件修订记录"）保持原样即可，需要长表格时按下面方式编写。
+
+- **单元格内断行**：列格式使用 `m{宽度}`（垂直居中）、`p{宽度}`（顶部对齐）或 `b{宽度}`（底部对齐），单元格内用 `\\` 换行
+- **跨页换页**：把 `tabular` 换成 `longtable` 即可自动跨页；`\endfirsthead` 之前为首页表头，`\endhead` 之前为续页表头（每页重复），`\endlastfoot` 之前为最后一页表尾
+- **表格标题**：`longtable` 内用 `\caption{标题}\label{标签}\\` 生成标题，可被交叉引用并进入表目录；若不需要编号/不进表目录，省略 `\caption` 即可
+- **最小示例**：
+
+```latex
+\begin{longtable}{ | m{1.5cm}<{\centering} | m{4cm}<{\centering} | m{4.64cm}<{\centering} | m{3.5cm}<{\centering} |}
+	\caption{示例表格}\label{tab:example}\\
+	\hline
+	版本号 & 生成日期 & 作者 & 修订内容 \\ % 首页表头
+	\hline
+	\endfirsthead
+	\hline
+	版本号 & 生成日期 & 作者 & 修订内容 \\ % 续页表头（自动重复）
+	\hline
+	\endhead
+	\hline
+	\endlastfoot
+	V1.0 & 2025年6月29日 & 作者 & 初始版本 \\ % 数据行（可继续添加）
+	\hline
+\end{longtable}
+```
+
+- **注意事项**：
+  - `longtable` **不能**放在 `center` 环境内（会阻止跨页分页）
+  - 行高调整 `\renewcommand{\arraystretch}{1.5}` 在表格结束后应恢复为 `1`，避免影响后续表格
 
 ## 注意事项
 - 模板仅供参考，具体格式请结合实际登记要求调整
