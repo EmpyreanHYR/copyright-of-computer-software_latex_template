@@ -1,0 +1,8 @@
+# 强制脚本换行风格：shell 脚本必须 LF（否则 shebang 失效），批处理用 CRLF
+*.sh        text eol=lf
+*.command   text eol=lf
+*.bat       text eol=crlf
+*.tex       text eol=lf
+*.sty       text eol=lf
+*.bib       text eol=lf
+.latexmkrc  text eol=lf

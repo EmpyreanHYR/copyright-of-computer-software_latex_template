@@ -1,0 +1,265 @@
+% ============================================================
+%  softcopyright.sty —— 计算机软件著作权说明书样式配置
+%
+%  本文件集中了模板的全部导言区配置（宏包、字体、字号、版面、
+%  标题格式、页眉、参考文献等），由 main.tex 通过
+%  \usepackage{softcopyright} 加载。
+%
+%  修改模板样式时请优先修改本文件；main.tex 只保留文档结构与内容。
+%
+%  主要可配置项：
+%    - 软件名称 / 版本号 / 作者：见“8. 作者与版本信息”一节
+%    - 参考文献方案（biblatex 或 bibtex）：见“10. 参考文献方案”一节
+% ============================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{softcopyright}[2025/07/01 v1.0 Software copyright manual style]
+
+\makeatletter
+
+% ------------------------------------------------------------
+%  1. 基础宏包
+% ------------------------------------------------------------
+\usepackage[]{graphicx}
+\usepackage[]{xcolor}
+
+% 图片最大宽度控制（自动缩放到行宽以内）
+\def\maxwidth{ %
+	\ifdim\Gin@nat@width>\linewidth
+	\linewidth
+	\else
+	\Gin@nat@width
+	\fi
+}
+
+\usepackage{framed}
+% 带背景色的代码/段落框（knitr 输出用）
+\newenvironment{kframe}{%
+	\def\at@end@of@kframe{}%
+	\ifinner\ifhmode%
+	\def\at@end@of@kframe{\end{minipage}}%
+\begin{minipage}{\columnwidth}%
+	\fi\fi%
+	\def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+		\colorbox{shadecolor}{##1}\hskip-\fboxsep
+		% There is no \\@totalrightmargin, so:
+		\hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+	\MakeFramed {\advance\hsize-\width
+		\@totalleftmargin\z@ \linewidth\hsize
+		\@setminipage}}%
+{\par\unskip\endMakeFramed%
+	\at@end@of@kframe}
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+
+% ------------------------------------------------------------
+%  2. 字体设置
+%     ctex 文档类已通过 fontset=auto 自动配置中文字体
+%     （Windows -> 宋体/黑体；macOS -> Songti SC；Linux -> Fandol），
+%     无需手动加载 xeCJK，也无需 \setCJKmonofont 硬编码
+%     （原 \setCJKmonofont{SimSun} 已删除：CJK 等宽字体同样由
+%     ctex 按平台接管，硬编码 SimSun 在非 Windows 上会编译失败）。
+%     内置中文命令：\songti \heiti \kaishu \fangsong
+%     本节只处理英文字体，并为非 Windows 平台提供回退。
+% ------------------------------------------------------------
+\usepackage{fontspec}
+
+% 英文主字体：按平台可用性自动回退
+%   Windows / macOS -> Times New Roman
+%   Linux           -> Liberation Serif / TeX Gyre Termes（TeX Live 自带）
+\IfFontExistsTF{Times New Roman}{%
+	\setmainfont{Times New Roman}}%
+{\IfFontExistsTF{Times}{%
+	\setmainfont{Times}}%
+{\IfFontExistsTF{Liberation Serif}{%
+	\setmainfont{Liberation Serif}}%
+{\IfFontExistsTF{TeX Gyre Termes}{%
+	\setmainfont{TeX Gyre Termes}}{}}}}
+
+% 英文等宽字体：按平台可用性自动回退（首选 Consolas）
+%   Windows -> Consolas
+%   macOS   -> Menlo / Courier New
+%   Linux   -> DejaVu Sans Mono / Liberation Mono
+% 若全部缺失则保持 fontspec 默认等宽字体，保证任何平台都能编译
+\IfFontExistsTF{Consolas}{%
+	\setmonofont{Consolas}}%
+{\IfFontExistsTF{Menlo}{%
+	\setmonofont{Menlo}}%
+{\IfFontExistsTF{Courier New}{%
+	\setmonofont{Courier New}}%
+{\IfFontExistsTF{DejaVu Sans Mono}{%
+	\setmonofont{DejaVu Sans Mono}}%
+{\IfFontExistsTF{Liberation Mono}{%
+	\setmonofont{Liberation Mono}}{}}}}}
+
+% ------------------------------------------------------------
+%  3. 版面尺寸与段落
+% ------------------------------------------------------------
+\usepackage[a4paper,top=3.5cm,bottom=2.6cm,left=3cm,right=2.6cm]{geometry}
+% 中文缩进两个汉字位，请勿修改
+\setlength{\parindent}{2.4em}
+
+% ------------------------------------------------------------
+%  4. 字号命令（供标题格式等处使用）
+% ------------------------------------------------------------
+\newcommand{\chuhao}{\fontsize{42pt}{\baselineskip}\selectfont}    %初号
+\newcommand{\xiaochuhao}{\fontsize{36pt}{\baselineskip}\selectfont}%小初号
+\newcommand{\yihao}{\fontsize{26pt}{\baselineskip}\selectfont}     %一号
+\newcommand{\xiaoyihao}{\fontsize{24pt}{\baselineskip}\selectfont} %小一号
+\newcommand{\erhao}{\fontsize{22pt}{\baselineskip}\selectfont}     %二号
+\newcommand{\xiaoerhao}{\fontsize{18pt}{\baselineskip}\selectfont} %小二号
+\newcommand{\sanhao}{\fontsize{16pt}{\baselineskip}\selectfont}    %三号
+\newcommand{\xiaosanhao}{\fontsize{15pt}{\baselineskip}\selectfont}%小三号
+\newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont}     %四号
+\newcommand{\xiaosihao}{\fontsize{12pt}{\baselineskip}\selectfont} %小四号
+\newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}   %五号
+\newcommand{\xiaowuhao}{\fontsize{9pt}{\baselineskip}\selectfont}  %小五号
+\newcommand{\liuhao}{\fontsize{7.5pt}{\baselineskip}\selectfont}   %六号
+\newcommand{\qihao}{\fontsize{5.5pt}{\baselineskip}\selectfont}    %七号
+
+% \hei 作为 \heiti（ctexart 内置黑体命令）的别名，兼容全文已有用法
+\newcommand{\hei}{\heiti}
+
+% ------------------------------------------------------------
+%  5. 章节标题、目录与行距
+% ------------------------------------------------------------
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{setspace}
+
+% 编号章节（正文 \section）自动从新页开始
+\titleformat{\section}{\newpage\hei\sanhao}{\thesection}{1em}{}
+% 无编号章节（\section*）不加 \newpage，避免目录/图表清单出现空白页
+\titleformat{name=\section,numberless}{\hei\sanhao}{}{1em}{}
+\titleformat{\subsection}{\hei\sihao}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\hei\xiaosihao}{\thesubsubsection}{1em}{}
+
+% 行间距（1.5 倍；setspace 对脚注/浮动体智能豁免）
+\onehalfspacing
+
+% ------------------------------------------------------------
+%  6. 数学、表格与代码宏包
+% ------------------------------------------------------------
+%公式环境数学命令
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pifont}
+%数组和表格制作
+\usepackage{array}
+\usepackage{booktabs}
+% 长表格：行数超一页时自动断行换页，并在续页重复表头（替换 supertabular）
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{abstract}
+\usepackage{enumerate}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{fancybox}
+\usepackage{fancyhdr}
+\usepackage{colortbl}
+% for fig.pos='H'
+\usepackage{float}
+% for subfigure —— 使用 subcaption 替代 subfig/subfloat，后者与 subcaption 冲突
+\usepackage{caption}
+\usepackage{subcaption}
+
+% ------------------------------------------------------------
+%  7. 图表与文献标题的中文化
+% ------------------------------------------------------------
+\renewcommand\tablename{表}
+\renewcommand\figurename{图}
+\renewcommand\refname{\sanhao\hei{参考文献}}
+% 图表清单标题留空（由 \section* 标题代替）
+\renewcommand{\listfigurename}{~}
+\renewcommand{\listtablename}{~}
+
+% 图片/表格命名辅助命令
+\newcommand{\figcaption}{\def\@captype{figure}\caption}
+\newcommand{\tabcaption}{\def\@captype{table}\caption}
+
+% 参考文献标注显示在右上角（用法：\upcite{key}）
+% 注：\upcite 由 gbt7714 样式内置，此处不定义，
+%     见下方“10. 参考文献方案”末尾的条件定义（兜底用）
+
+% ------------------------------------------------------------
+%  8. 作者与版本信息（修改请在本节进行）
+% ------------------------------------------------------------
+% 定义统一的作者和版本号
+\newcommand{\SoftwareName}{软件名称}
+\newcommand{\Version}{V1.0}
+
+% 定义纯作者列表（不含“作者：”，用换行分隔）
+\newcommand{\PureAuthors}{%
+	作者1 \\
+	作者2 \\
+	作者3%
+}
+
+% 带前缀的完整作者显示（“作者：”不参与替换）
+\newcommand{\BasicAuthor}{作者：\\\PureAuthors}
+
+% 修订记录的作者（仅处理纯作者列表，换行转逗号）
+\usepackage{xstring}
+\newcommand{\RevisedAuthor}{%
+	\StrSubstitute{\PureAuthors}{\\}{, }% 只替换作者间的换行
+}
+
+% ------------------------------------------------------------
+%  9. 页眉页脚
+% ------------------------------------------------------------
+%获得总页数
+\usepackage{lastpage}
+
+% 设置页眉样式（公共定义避免重复）
+\newcommand{\CommonHeader}{
+	\fancyhead[L]{\wuhao{\SoftwareName~~~\Version}}%
+	\fancyhead[R]{Page \thepage\ of \pageref{LastPage}}%
+}
+\fancypagestyle{plain}{
+	\fancyhead{}
+	\CommonHeader
+}
+\pagestyle{fancy}
+\fancyhead{}
+\CommonHeader
+
+\setlength{\headheight}{14.5pt} % 消除 fancyhdr \headheight too small 警告
+
+% ------------------------------------------------------------
+%  10. 参考文献方案（二选一，默认启用方案 A）
+% ------------------------------------------------------------
+% 用于正文自动判断当前启用的是哪种方案（\ifcsdef{printbibliography}）
+\usepackage{etoolbox}
+
+% ---- 方案 A（默认，推荐）：biblatex + biber + gbt7714 样式 ----
+% GB/T 7714-2015 顺序编码制（按正文引用顺序编号）
+\usepackage[backend=biber, style=gb7714-2015, sorting=none]{biblatex}
+\addbibresource{refs.bib}
+
+% ---- 方案 B（备选）：bibtex + gbt7714 宏包（natbib 接口）----
+% 需要 TeX Live 自带的 gbt7714 宏包（含 gbt7714-numerical.bst）。
+% 如需切换：注释掉上面方案 A 的两行，并取消下面一行的注释。
+% \bibliographystyle 与 \bibliography 由 main.tex 参考文献部分统一处理。
+% \usepackage[sort&compress]{gbt7714}
+
+% \upcite 兜底定义：仅当所选参考文献方案未内置 \upcite 时才定义
+% （gbt7714 的 biblatex 与 natbib 接口均已内置，一般不会走到这里）
+\ifdef{\upcite}{}{\newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}}}
+
+% ------------------------------------------------------------
+%  11. 超链接支持（务必最后加载）
+% ------------------------------------------------------------
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% 超链接支持 —— PDF 目录、交叉引用、URL 可点击跳转
+\usepackage[colorlinks=true,
+            linkcolor=black,
+            citecolor=black,
+            urlcolor=blue]{hyperref}
+
+\makeatother
+\endinput

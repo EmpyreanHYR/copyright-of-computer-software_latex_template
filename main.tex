@@ -1,193 +1,45 @@
 % !TEX program = xelatex
-\documentclass[12pt,fontset=windows]{ctexart}
-\usepackage[]{graphicx}
-\usepackage[]{xcolor}
-\makeatletter
-\def\maxwidth{ %
-	\ifdim\Gin@nat@width>\linewidth
-	\linewidth
-	\else
-	\Gin@nat@width
-	\fi
-}
-\makeatother
+% ============================================================
+%  计算机软件著作权说明书 —— 主文件
+%
+%  本文件只保留文档结构与内容引入；
+%  全部样式配置（宏包、字体、字号、标题格式、参考文献等）
+%  集中在 softcopyright.sty，请优先在那里修改。
+% ============================================================
+\documentclass[12pt]{ctexart}
+% 说明：不指定 fontset 选项即为 ctex 自动检测（等效 fontset=auto）：
+%   Windows -> 宋体/黑体，macOS -> Songti SC，Linux -> Fandol
+% 请勿手写 fontset=windows 等硬编码，否则无法跨平台编译。
+\usepackage{softcopyright}
 
-
-\usepackage{framed}
-\makeatletter
-\newenvironment{kframe}{%
-	\def\at@end@of@kframe{}%
-	\ifinner\ifhmode%
-	\def\at@end@of@kframe{\end{minipage}}%
-\begin{minipage}{\columnwidth}%
-	\fi\fi%
-	\def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
-		\colorbox{shadecolor}{##1}\hskip-\fboxsep
-		% There is no \\@totalrightmargin, so:
-		\hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
-	\MakeFramed {\advance\hsize-\width
-		\@totalleftmargin\z@ \linewidth\hsize
-		\@setminipage}}%
-{\par\unskip\endMakeFramed%
-	\at@end@of@kframe}
-\makeatother
-
-\definecolor{shadecolor}{rgb}{.97, .97, .97}
-\definecolor{messagecolor}{rgb}{0, 0, 0}
-\definecolor{warningcolor}{rgb}{1, 0, 1}
-\definecolor{errorcolor}{rgb}{1, 0, 0}
-\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
-
-\usepackage{alltt}
-%以下是关于字体、版面的设置
-% ctexart 文档类已自动配置中文字体（fontset=windows），无需 xeCJK 手动加载
-% 内置命令：\songti（宋体）\heiti（黑体）\kaishu（楷书）\fangsong（仿宋）
-% 以下仅设等宽中文字体，文档若无代码块可删除此行
-\setCJKmonofont{SimSun}
-% 设置缺省英文字体          
-\setmainfont{Times New Roman}
-% 英文等宽字体 —— 原为 Times（非等宽），已修正；如无 Consolas 可改为 Courier New
-\setmonofont{Consolas}
-% 文档不使用无衬线字体，删除原 \setsansfont{Times New Roman}（衬线体设为无衬线属语义错误）         
-%版面尺寸设置
-\usepackage[a4paper,top=3.5cm,bottom=2.6cm,left=3cm,right=2.6cm]{geometry}
-%中文缩进两个汉字位，请勿修改
-\setlength{\parindent}{2.4em}                                     
-%章节标题格式设置
-\usepackage{titlesec}
-%目录格式设置              
-\usepackage{titletoc}
-% 首行缩进已由 ctexart 内置处理，无需 indentfirst
-% 精确控制行距（自动豁免脚注/浮动体）
-\usepackage{setspace}
-%获得总页数           
-\usepackage{lastpage}
-%公式环境数学命令              
-\usepackage{amsmath}               
-\usepackage{amssymb}
-\usepackage{pifont} 
-%数组和表格制作
-\usepackage{array}                
-\usepackage{booktabs}
-% 长表格：行数超一页时自动断行换页，并在续页重复表头（替换 supertabular）
-\usepackage{longtable}
-\usepackage{multirow}
-\usepackage{abstract}
-\usepackage{enumerate}
-\usepackage{verbatim}
-\usepackage{listings}
-% pgffor 曾用于修订记录表格的 \foreach 循环，因 tabular 内与 \noalign 冲突已移除
-\usepackage{fancybox}
-\usepackage{fancyhdr}
-\usepackage{colortbl}
-% for fig.pos='H' 
-\usepackage{float}
-% for subfigure —— 使用 subcaption 替代 subfig/subfloat，后者与 subcaption 冲突
-\usepackage{caption}
-\usepackage{subcaption}
-
-%以下是关于字号的设置
-\makeatletter
-\newcommand{\chuhao}{\fontsize{42pt}{\baselineskip}\selectfont}    %初号
-\newcommand{\xiaochuhao}{\fontsize{36pt}{\baselineskip}\selectfont}%小初号
-\newcommand{\yihao}{\fontsize{26pt}{\baselineskip}\selectfont}     %一号
-\newcommand{\xiaoyihao}{\fontsize{24pt}{\baselineskip}\selectfont} %小一号
-\newcommand{\erhao}{\fontsize{22pt}{\baselineskip}\selectfont}     %二号
-\newcommand{\xiaoerhao}{\fontsize{18pt}{\baselineskip}\selectfont} %小二号
-\newcommand{\sanhao}{\fontsize{16pt}{\baselineskip}\selectfont}    %三号
-\newcommand{\xiaosanhao}{\fontsize{15pt}{\baselineskip}\selectfont}%小三号
-\newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont}     %四号
-\newcommand{\xiaosihao}{\fontsize{12pt}{\baselineskip}\selectfont} %小四号
-\newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}   %五号
-\newcommand{\xiaowuhao}{\fontsize{9pt}{\baselineskip}\selectfont}  %小五号
-\newcommand{\liuhao}{\fontsize{7.5pt}{\baselineskip}\selectfont}   %六号
-\newcommand{\qihao}{\fontsize{5.5pt}{\baselineskip}\selectfont}    %七号
-
-% \hei 作为 \heiti（ctexart 内置黑体命令）的别名，兼容全文已有用法
-\newcommand{\hei}{\heiti}
-
-
-% 编号章节（正文 \section）自动从新页开始
-\titleformat{\section}{\newpage\hei\sanhao}{\thesection}{1em}{}
-% 无编号章节（\section*）不加 \newpage，避免目录/图表清单出现空白页
-\titleformat{name=\section,numberless}{\hei\sanhao}{}{1em}{}
-\titleformat{\subsection}{\hei\sihao}{\thesubsection}{1em}{}
-\titleformat{\subsubsection}{\hei\xiaosihao}{\thesubsubsection}{1em}{}
-
-% 行间距（1.5 倍；setspace 对脚注/浮动体智能豁免）
-\onehalfspacing     
-
-\renewcommand\tablename{表}
-\renewcommand\figurename{图}
-\renewcommand\refname{\sanhao\hei{参考文献}}
-
-%图片命名的修改
-\newcommand{\figcaption}{\def\@captype{figure}\caption}
-%表格命名的修改 
-\newcommand{\tabcaption}{\def\@captype{table}\caption}
-
-%让文中的参考文献标注显示在右上角，并修改为命令为\upcite{}
-\newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}}
-
-% 定义统一的作者和版本号
-\newcommand{\SoftwareName}{软件名称}
-\newcommand{\Version}{V1.0}
-
-% 定义纯作者列表（不含“作者：”，用换行分隔）
-\newcommand{\PureAuthors}{%
-	作者1 \\ 
-	作者2 \\ 
-	作者3%
-}
-
-% 带前缀的完整作者显示（“作者：”不参与替换）
-\newcommand{\BasicAuthor}{作者：\\\PureAuthors}
-
-% 修订记录的作者（仅处理纯作者列表，换行转逗号）
-\usepackage{xstring}
-\newcommand{\RevisedAuthor}{%
-	\StrSubstitute{\PureAuthors}{\\}{, }% 只替换作者间的换行
-}
-
-% 设置页眉样式（公共定义避免重复）
-\newcommand{\CommonHeader}{
-	\fancyhead[L]{\wuhao{\SoftwareName~~~\Version}}%
-	\fancyhead[R]{Page \thepage\ of \pageref{LastPage}}%
-}
-\fancypagestyle{plain}{
-	\fancyhead{}
-	\CommonHeader
-}
-\pagestyle{fancy}
-\fancyhead{}
-\CommonHeader
-
-\setlength{\headheight}{14.5pt} % 消除 fancyhdr \headheight too small 警告
-
-\makeatother
-
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% 超链接支持 —— PDF 目录、交叉引用、URL 可点击跳转
-\usepackage[colorlinks=true,
-            linkcolor=black,
-            citecolor=black,
-            urlcolor=blue]{hyperref}
+% ------------------------------------------------------------
+%  【编写技巧】单独编译某一章以大幅提速：
+%  取消下面一行的注释，即只编译“2_operation”一章
+%  （配合 \include 使用；\includeonly 参数须与 \include 完全一致）：
+%
+%   \includeonly{texfile/2_operation}
+%
+%  注意：正式提交/生成最终 PDF 前，请务必注释掉这一行做全量编译。
+% ============================================================
 
 \begin{document}
-	% 设置第一个标题
-	\title{\erhao\textbf{\SoftwareName}\\[0.5em] \sanhao 使用说明} 
+	% ========== 封面 ==========
+	\title{\erhao\textbf{\SoftwareName}\\[0.5em] \sanhao 使用说明}
 	% 设置作者和日期
 	\author{ \BasicAuthor }
 	\date{}
 	\maketitle
-	
+
+	% ========== 文件修订记录 ==========
 	\newpage
-	% 文件修订记录章节
 	\section*{文件修订记录}
 	\addcontentsline{toc}{section}{文件修订记录}  % 手动添加到目录
-	
+
+	% \arraystretch 仅作用于本表格：用 \begingroup ... \endgroup
+	% 限定作用域，避免影响文档后续所有表格的行高
+	\begingroup
 	\renewcommand{\arraystretch}{1.5} % 调整行高为原来的 1.5 倍
-	
+
 	\begin{center}
 		\begin{tabular}{ | m{1.5cm}<{\centering}|m{4cm}<{\centering} | m{4.64cm}<{\centering} | m{3.5cm}<{\centering} |}
 			\hline
@@ -219,10 +71,13 @@
 			\hline
 			&  &  &  \\ % 空行
 			\hline
+			&  &  &  \\ % 空行
+			\hline
 		\end{tabular}
 	\end{center}
-	
-	% 目录
+	\endgroup
+
+	% ========== 目录 ==========
 	\newpage
 	\section*{目录}
 	\addcontentsline{toc}{section}{目录}  % 手动添加到目录
@@ -230,34 +85,36 @@
 	\@starttoc{toc}% 直接输出目录内容，避免覆盖 \tableofcontents 原始定义
 	\makeatother
 
-		% 图表清单
+	% ========== 图目录 ==========
 	\newpage
 	\section*{图目录}
 	\addcontentsline{toc}{section}{图目录}
-	\renewcommand{\listfigurename}{~}
 	\listoffigures
-	
+
+	% ========== 表目录 ==========
 	\newpage
 	\section*{表目录}
 	\addcontentsline{toc}{section}{表目录}
-	\renewcommand{\listtablename}{~}
 	\listoftables
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%
-	%以下是正文
-	%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\newpage
-	\input{texfile/1_introduction.tex}
-	\newpage
-	\input{texfile/2_operation.tex}
-	\newpage
-	\input{texfile/3_summary.tex}
-	
-	% 参考文献
+
+	% ========== 正文 ==========
+	% 使用 \include 引入章节（而非 \input）：
+	%   1. \include 会在每个章节前后自动分页，符合软著说明书
+	%      每章从新页开始的要求（无需再手动写 \newpage）；
+	%   2. 配合文件头部的 \includeonly 可单独编译某一章，大幅
+	%      提升编写时的编译速度。
+	\include{texfile/1_introduction}
+	\include{texfile/2_operation}
+	\include{texfile/3_summary}
+
+	% ========== 参考文献 ==========
+	% 根据 softcopyright.sty 中启用的方案自动输出：
+	%   方案 A（biblatex） -> \printbibliography
+	%   方案 B（bibtex）   -> \bibliographystyle + \bibliography
 	\clearpage
 	\addcontentsline{toc}{section}{参考文献}
-	\begin{thebibliography}{99}
-		\bibitem{example} 示例参考文献。请替换为实际引用的文献条目。
-	\end{thebibliography}
+	\ifcsdef{printbibliography}
+		{\printbibliography[title={参考文献}]}   % 方案 A：biblatex + biber
+		{\bibliographystyle{gbt7714-numerical}\bibliography{refs}} % 方案 B：bibtex
+
 \end{document}
