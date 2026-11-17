@@ -2,15 +2,37 @@
 % ============================================================
 %  计算机软件著作权说明书 —— 主文件
 %
-%  本文件只保留文档结构与内容引入；
-%  全部样式配置（宏包、字体、字号、标题格式、参考文献等）
-%  集中在 softcopyright.sty，请优先在那里修改。
+%  本文件包含软件信息配置、文档结构与内容引入；
+%  样式配置（宏包、字体、字号、标题格式、参考文献等）
+%  集中在 softcopyright.sty。
 % ============================================================
 \documentclass[12pt]{ctexart}
 % 说明：不指定 fontset 选项即为 ctex 自动检测（等效 fontset=auto）：
 %   Windows -> 宋体/黑体，macOS -> Songti SC，Linux -> Fandol
 % 请勿手写 fontset=windows 等硬编码，否则无法跨平台编译。
 \usepackage{softcopyright}
+
+% ------------------------------------------------------------
+%  作者与版本信息（请在此处修改）
+% ------------------------------------------------------------
+% 定义统一的软件名称与版本号
+\newcommand{\SoftwareName}{软件名称}
+\newcommand{\Version}{V1.0}
+
+% 定义纯作者列表（不含“作者：”，用换行分隔）
+\newcommand{\PureAuthors}{%
+	作者1 \\
+	作者2 \\
+	作者3%
+}
+
+% 带前缀的完整作者显示（“作者：”不参与替换）
+\newcommand{\BasicAuthor}{作者：\\\PureAuthors}
+
+% 修订记录的作者（仅处理纯作者列表，换行转逗号）
+\newcommand{\RevisedAuthor}{%
+	\StrSubstitute{\PureAuthors}{\\}{, }% 只替换作者间的换行
+}
 
 % ------------------------------------------------------------
 %  【编写技巧】单独编译某一章以大幅提速：
@@ -32,6 +54,7 @@
 
 	% ========== 文件修订记录 ==========
 	\newpage
+	\phantomsection
 	\section*{文件修订记录}
 	\addcontentsline{toc}{section}{文件修订记录}  % 手动添加到目录
 
@@ -39,7 +62,7 @@
 	% 限定作用域，避免影响文档后续所有表格的行高
 	\begingroup
 	\renewcommand{\arraystretch}{1.5} % 调整行高为原来的 1.5 倍
-
+	%保持空行不删除，维持合格的表格样式
 	\begin{center}
 		\begin{tabular}{ | m{1.5cm}<{\centering}|m{4cm}<{\centering} | m{4.64cm}<{\centering} | m{3.5cm}<{\centering} |}
 			\hline
@@ -79,6 +102,7 @@
 
 	% ========== 目录 ==========
 	\newpage
+	\phantomsection
 	\section*{目录}
 	\addcontentsline{toc}{section}{目录}  % 手动添加到目录
 	\makeatletter
@@ -87,12 +111,14 @@
 
 	% ========== 图目录 ==========
 	\newpage
+	\phantomsection
 	\section*{图目录}
 	\addcontentsline{toc}{section}{图目录}
 	\listoffigures
 
 	% ========== 表目录 ==========
 	\newpage
+	\phantomsection
 	\section*{表目录}
 	\addcontentsline{toc}{section}{表目录}
 	\listoftables
@@ -112,6 +138,7 @@
 	%   方案 A（biblatex） -> \printbibliography
 	%   方案 B（bibtex）   -> \bibliographystyle + \bibliography
 	\clearpage
+	\phantomsection
 	\addcontentsline{toc}{section}{参考文献}
 	\ifcsdef{printbibliography}
 		{\printbibliography[title={参考文献}]}   % 方案 A：biblatex + biber

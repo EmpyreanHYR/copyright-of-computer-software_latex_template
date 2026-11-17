@@ -5,4 +5,11 @@
 *.tex       text eol=lf
 *.sty       text eol=lf
 *.bib       text eol=lf
+*.yml       text eol=lf
+*.yaml      text eol=lf
+*.md        text eol=lf
 .latexmkrc  text eol=lf
+
+# 归档导出时忽略开发与 CI 配置
+.github        export-ignore
+.gitattributes export-ignore

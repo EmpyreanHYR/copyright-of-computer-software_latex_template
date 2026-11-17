@@ -11,7 +11,7 @@
 # ============================================================
 
 # 使用 XeLaTeX 生成 PDF（中文支持）
-$pdf_mode = 4;
+$pdf_mode = 5;
 $xelatex  = 'xelatex -synctex=1 -interaction=nonstopmode -halt-on-error %O %S';
 
 # 参考文献后端自动选择：

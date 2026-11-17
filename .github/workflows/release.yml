@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+      - 'V*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & Release Package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Clean Archive
+        run: |
+          ZIP_NAME="copyright-of-computer-software_latex_template-${{ github.ref_name }}.zip"
+          # 使用 git archive 打包项目（自动剔除 .git、未跟踪的 LaTeX 编译产物及开发配置）
+          git archive --format=zip -o "$ZIP_NAME" HEAD
+          echo "ZIP_NAME=$ZIP_NAME" >> "$GITHUB_ENV"
+
+      - name: Publish Release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          name: Release ${{ github.ref_name }}
+          files: |
+            ${{ env.ZIP_NAME }}
+            main.pdf
+          generate_release_notes: true
